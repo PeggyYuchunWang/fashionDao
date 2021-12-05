@@ -3,27 +3,12 @@ import { ethers } from "ethers";
 import './App.css';
 import abi from './utils/WavePortal.json';
 
-import Toast from 'react-bootstrap/Toast';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-const ExampleToast = ({ children }) => {
-  const [show, toggleShow] = useState(true);
-
-  return (
-    <>
-      {!show && <Button onClick={() => toggleShow(true)}>Show Toast</Button>}
-      <Toast show={show} onClose={() => toggleShow(false)}>
-        <Toast.Header>
-          <strong className="mr-auto">React-Bootstrap</strong>
-        </Toast.Header>
-        <Toast.Body>{children}</Toast.Body>
-      </Toast>
-    </>
-  );
-};
 
 const App = () => {
   const [currentAccount, setCurrentAccount] = useState("");
@@ -60,55 +45,47 @@ const App = () => {
     }
   }
 
-  /**
-  * Implement your connectWallet method here
-  */
-  const connectWallet = async () => {
+  const getVote = async () => {
     try {
       const { ethereum } = window;
-
-      if (!ethereum) {
-        alert("Get MetaMask!");
-        return;
-      }
-
-      const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-
-      console.log("Connected", accounts[0]);
-      setCurrentAccount(accounts[0]); 
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const wave = async () => {
-    console.log("sup wave");
-    try {
-      const { ethereum } = window;
-      console.log("wave working ish 0");
 
       if (ethereum) {
-        console.log("wave working ish");
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
         const wavePortalContract = new ethers.Contract(contractAddress, contractABI, signer);
         console.log(wavePortalContract);
 
-        let count = await wavePortalContract.placeVote("1");
-        // console.log("Retrieved total wave count...", count.toNumber());
-
-        /*
-        * Execute the actual wave from your smart contract
-        */
-        // const waveTxn = await wavePortalContract.wave();
-        // console.log("Mining...", waveTxn.hash);
-
-        // await waveTxn.wait();
-        // console.log("Mined -- ", waveTxn.hash);
-
-        // count = await wavePortalContract.placeVote("1");
         let totalVotes = await wavePortalContract.votes("1");
-        console.log("Retrieved total wave count...", totalVotes);
+        console.log("Retrieved total wave count for Sweatshirt 1", totalVotes);
+
+        totalVotes = await wavePortalContract.votes("2");
+        console.log("Retrieved total wave count for Sweatshirt 2", totalVotes);
+
+        totalVotes = await wavePortalContract.votes("3");
+        console.log("Retrieved total wave count for Sweatshirt 3", totalVotes);
+
+        totalVotes = await wavePortalContract.votes("4");
+        console.log("Retrieved total wave count for Sweatshirt 4", totalVotes);
+      } else {
+        console.log("Ethereum object doesn't exist!");
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const vote = async (number) => {
+    try {
+      const { ethereum } = window;
+
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const wavePortalContract = new ethers.Contract(contractAddress, contractABI, signer);
+        console.log(wavePortalContract);
+
+        let count = await wavePortalContract.placeVote(number);
+        console.log("placed vote for ", number);
       } else {
         console.log("Ethereum object doesn't exist!");
       }
@@ -123,20 +100,66 @@ const App = () => {
   }, [])
   
   return (
-    <div className="mainContainer">
-      <div className="dataContainer">
-      </div>
-      <Container className="p-3">
-          <h1 className="header">Welcome To React-Bootstrap</h1>
-          <ExampleToast>
-            We now have Toasts
-            <button className="waveButton" onClick={wave}>
-              Wave at Me
+    <Container fluid className="p-3">
+        <h1 className="header">FashionDAO</h1>
+        <Row>
+        <Card style={{ width: '20%' }}>
+          <Card.Img variant="top" src="/img/01-Pink-Hoodie_Update.png" />
+          <Card.Body>
+            <Card.Title>Sweatshirt 1</Card.Title>
+            <Card.Text>
+              Some quick example text to build on the card title and make up the bulk of
+              the card's content.
+            </Card.Text>
+            <button className="waveButton" onClick={() => vote("1")}>
+            Vote
             </button>
-          </ExampleToast>
-          
-      </Container>
-    </div>
+          </Card.Body>
+        </Card>
+        <Card style={{ width: '20%' }}>
+          <Card.Img variant="top" src="/img/images.png" />
+          <Card.Body>
+            <Card.Title>Sweatshirt 2</Card.Title>
+            <Card.Text>
+              Some quick example text to build on the card title and make up the bulk of
+              the card's content.
+            </Card.Text>
+            <button className="waveButton" onClick={() => vote("2")}>
+            Vote
+            </button>
+          </Card.Body>
+        </Card>
+        <Card style={{ width: '20%' }}>
+          <Card.Img variant="top" src="/img/images2.png" />
+          <Card.Body>
+            <Card.Title>Sweatshirt 3</Card.Title>
+            <Card.Text>
+              Some quick example text to build on the card title and make up the bulk of
+              the card's content.
+            </Card.Text>
+            <button className="waveButton" onClick={() => vote("3")}>
+            Vote
+            </button>
+          </Card.Body>
+        </Card>
+        <Card style={{ width: '20%' }}>
+          <Card.Img variant="top" src="/img/Z.png" />
+          <Card.Body>
+            <Card.Title>Sweatshirt 4</Card.Title>
+            <Card.Text>
+              Some quick example text to build on the card title and make up the bulk of
+              the card's content.
+            </Card.Text>
+            <button className="waveButton" onClick={() => vote("4")}>
+            Vote
+            </button>
+          </Card.Body>
+        </Card>
+        </Row>
+        <button className="waveButton" onClick={() => getVote()}>
+          Get Total Vote
+        </button>
+    </Container>
   );
 }
 
