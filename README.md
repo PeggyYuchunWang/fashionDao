@@ -1,6 +1,7 @@
-# Basic Sample Hardhat Project
+# Fashion DAO
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
+Fashion DAO is piloting a new way to set and create the next fashion trends: members of the DAO can both propose designs for feedback and vote on available designs to determine which should be manufactured for the masses. 
+
 
 Try running some of the following tasks:
 
