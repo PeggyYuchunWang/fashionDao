@@ -12,6 +12,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
   const [currentAccount, setCurrentAccount] = useState("");
+  const [uploadVoteCount1, setUploadVoteCount1] = useState(0);
+  const [uploadVoteCount2, setUploadVoteCount2] = useState(0);
+  const [uploadVoteCount3, setUploadVoteCount3] = useState(0);
+  const [uploadVoteCount4, setUploadVoteCount4] = useState(0);
   
   const contractAddress = "0xCC474620C7513919f16210F368a7E913C1cB7c64";
   /**
@@ -57,15 +61,19 @@ const App = () => {
 
         let totalVotes = await wavePortalContract.votes("1");
         console.log("Retrieved total wave count for Sweatshirt 1", totalVotes);
+        setUploadVoteCount1(parseInt(totalVotes._hex, 16));
 
         totalVotes = await wavePortalContract.votes("2");
         console.log("Retrieved total wave count for Sweatshirt 2", totalVotes);
+        setUploadVoteCount2(parseInt(totalVotes._hex, 16));
 
         totalVotes = await wavePortalContract.votes("3");
         console.log("Retrieved total wave count for Sweatshirt 3", totalVotes);
+        setUploadVoteCount3(parseInt(totalVotes._hex, 16));
 
         totalVotes = await wavePortalContract.votes("4");
         console.log("Retrieved total wave count for Sweatshirt 4", totalVotes);
+        setUploadVoteCount4(parseInt(totalVotes._hex, 16));
       } else {
         console.log("Ethereum object doesn't exist!");
       }
@@ -90,7 +98,7 @@ const App = () => {
         console.log("Ethereum object doesn't exist!");
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
@@ -114,6 +122,9 @@ const App = () => {
             <button className="waveButton" onClick={() => vote("1")}>
             Vote
             </button>
+            <Card.Text>
+              Total votes: {uploadVoteCount1} 
+            </Card.Text>
           </Card.Body>
         </Card>
         <Card style={{ width: '20%' }}>
@@ -127,6 +138,9 @@ const App = () => {
             <button className="waveButton" onClick={() => vote("2")}>
             Vote
             </button>
+            <Card.Text>
+              Total votes: {uploadVoteCount2} 
+            </Card.Text>
           </Card.Body>
         </Card>
         <Card style={{ width: '20%' }}>
@@ -140,6 +154,9 @@ const App = () => {
             <button className="waveButton" onClick={() => vote("3")}>
             Vote
             </button>
+            <Card.Text>
+              Total votes: {uploadVoteCount3} 
+            </Card.Text>
           </Card.Body>
         </Card>
         <Card style={{ width: '20%' }}>
@@ -153,6 +170,9 @@ const App = () => {
             <button className="waveButton" onClick={() => vote("4")}>
             Vote
             </button>
+            <Card.Text>
+              Total votes: {uploadVoteCount4} 
+            </Card.Text>
           </Card.Body>
         </Card>
         </Row>
