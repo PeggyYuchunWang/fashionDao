@@ -103,52 +103,55 @@ const App = () => {
     <Container fluid className="p-3">
         <h1 className="header">FashionDAO</h1>
         <Row>
-        <Card style={{ width: '20%' }}>
-          <Card.Img variant="top" src="/img/01-Pink-Hoodie_Update.png" />
+        <Card style={{ width: '22%', margin: "0 auto" }}>
+          <Card.Img variant="top" src="/img/1.png" />
           <Card.Body>
-            <Card.Title>Sweatshirt 1</Card.Title>
+            <Card.Title>FashionDAO</Card.Title>
             <Card.Text>
-              Some quick example text to build on the card title and make up the bulk of
-              the card's content.
+            Midnight-black crewneck. Embroidered logo in "sterling silver."
+            
+            creator: https://twitter.com/Austinsc2014
             </Card.Text>
             <button className="waveButton" onClick={() => vote("1")}>
             Vote
             </button>
           </Card.Body>
         </Card>
-        <Card style={{ width: '20%' }}>
-          <Card.Img variant="top" src="/img/images.png" />
+        <Card style={{ width: '22%', margin: "0 auto" }}>
+          <Card.Img variant="top" src="/img/2.png" />
           <Card.Body>
-            <Card.Title>Sweatshirt 2</Card.Title>
+            <Card.Title>Midnight in Meta(verse)</Card.Title>
             <Card.Text>
-              Some quick example text to build on the card title and make up the bulk of
-              the card's content.
+            Midnight-black crewneck. Embroidered logo in "flashlight white." 
+            
+            creator: https://twitter.com/peggy_wang
             </Card.Text>
             <button className="waveButton" onClick={() => vote("2")}>
             Vote
             </button>
           </Card.Body>
         </Card>
-        <Card style={{ width: '20%' }}>
-          <Card.Img variant="top" src="/img/images2.png" />
+        <Card style={{ width: '22%', margin: "0 auto"}}>
+          <Card.Img variant="top" src="/img/3.png" />
           <Card.Body>
-            <Card.Title>Sweatshirt 3</Card.Title>
+            <Card.Title>Crypto Fyres Everywhere</Card.Title>
             <Card.Text>
-              Some quick example text to build on the card title and make up the bulk of
-              the card's content.
+            Snowflake-white crewneck. Embroidered logo in "youpreme red."
+            creator: https://twitter.com/priyamuurali
             </Card.Text>
             <button className="waveButton" onClick={() => vote("3")}>
             Vote
             </button>
           </Card.Body>
         </Card>
-        <Card style={{ width: '20%' }}>
-          <Card.Img variant="top" src="/img/Z.png" />
+        <Card style={{ width: '22%', margin: "0 auto" }}>
+          <Card.Img variant="top" src="/img/4.png" />
           <Card.Body>
-            <Card.Title>Sweatshirt 4</Card.Title>
+            <Card.Title>Ayushi in Cryptoland</Card.Title>
             <Card.Text>
-              Some quick example text to build on the card title and make up the bulk of
-              the card's content.
+              Snowflake-white crewneck. Embroidered logo in "mystical green." 
+              
+              creator: https://twitter.com/ayushisinhahaha
             </Card.Text>
             <button className="waveButton" onClick={() => vote("4")}>
             Vote
@@ -156,9 +159,13 @@ const App = () => {
           </Card.Body>
         </Card>
         </Row>
+        <div class="container">
+          <div class="center">
         <button className="waveButton" onClick={() => getVote()}>
           Get Total Vote
         </button>
+        </div>
+        </div>
     </Container>
   );
 }
